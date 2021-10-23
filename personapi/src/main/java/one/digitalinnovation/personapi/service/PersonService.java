@@ -14,16 +14,10 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    //private final PersonMapper personMapper = PersonMapper.INSTANCE;
+    private final PersonMapper personMapper = PersonMapper.INSTANCE;
 
     public MessageResponseDTO createPerson(PersonDTO personDTO){
-        //Person personToSave = personMapper.toModel(personDTO);
-        Person personToSave = Person.builder().
-                firstName(personDTO.getFirstName())
-                .lastName(personDTO.getLastName())
-                .cpf(personDTO.getCpf())
-                .phones(personDTO.getPhones()).build();
-
+        Person personToSave = personMapper.toModel(personDTO);
         Person savedPerson = personRepository.save(personToSave);
         return MessageResponseDTO
                 .builder()
